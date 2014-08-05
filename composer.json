@@ -1,0 +1,28 @@
+{
+    "name": "webuni/assetic-bundle",
+    "type": "symfony-bundle",
+    "description": "Extra feature for Assetic",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Hasoň",
+            "email": "martin.hason@gmail.com"
+        }
+    ],
+
+    "require": {
+        "symfony/assetic-bundle": "~2.1"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Webuni\\AsseticBundle\\": ""
+        }
+    },
+
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
