@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service id="assetic.filter.csswebrewrite" class="Webuni\AsseticBundle\Filter\CssWebRewriteFilter">
+            <tag name="assetic.filter" alias="csswebrewrite" />
+            <argument>%assetic.write_to%</argument>
+        </service>
+    </services>
+</container>
