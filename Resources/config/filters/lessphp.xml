@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+    <parameters>
+        <parameter key="assetic.filter.lessphp.class">Webuni\AsseticBundle\Filter\LessphpFilter</parameter>
+    </parameters>
+
+    <services>
+        <service id="assetic.filter.lessphp" class="%assetic.filter.lessphp.class%">
+            <tag name="assetic.filter" alias="lessphp" />
+            <argument>%assetic.write_to%</argument>
+        </service>
+    </services>
+</container>
