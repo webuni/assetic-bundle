@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service id="assetic.filter.cssrewrite" class="Webuni\AsseticBundle\Filter\CssRewriteFilter">
+            <tag name="assetic.filter" alias="cssrewrite" />
+        </service>
+    </services>
+</container>
