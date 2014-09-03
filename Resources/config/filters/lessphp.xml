@@ -8,6 +8,7 @@
         <service id="assetic.filter.lessphp" class="%assetic.filter.lessphp.class%">
             <tag name="assetic.filter" alias="lessphp" />
             <argument>%assetic.write_to%</argument>
+            <argument>%assetic.cache_dir%/lessphp</argument>
         </service>
     </services>
 </container>

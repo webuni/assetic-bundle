@@ -6,7 +6,9 @@
 
 namespace Webuni\AsseticBundle\Filter;
 
+use Assetic\Cache\ConfigCache;
 use Assetic\Filter\LessphpFilter as BaseLessphpFilter;
+use Assetic\Factory\AssetFactory;
 use Assetic\Asset\AssetInterface;
 
 /**
@@ -15,12 +17,13 @@ use Assetic\Asset\AssetInterface;
 class LessphpFilter extends BaseLessphpFilter
 {
     private $formatter;
-
     private $webDir;
+    private $cache;
 
-    public function __construct($webDir)
+    public function __construct($webDir, $cacheDir)
     {
         $this->webDir = $webDir;
+        $this->cache = new ConfigCache($cacheDir);
     }
 
     /**
@@ -55,8 +58,22 @@ class LessphpFilter extends BaseLessphpFilter
         };
         $parser->SetImportDirs($importDirs);
 
-        $parser->parse($asset->getContent());
+        $content = $asset->getContent();
+        $parser->parse($content);
+        $css = $parser->getCss();
 
-        $asset->setContent($parser->getCss());
+        $this->cache->set(md5($content), \Less_Parser::AllParsedFiles());
+
+        $asset->setContent($css);
+    }
+
+    public function getChildren(AssetFactory $factory, $content, $loadPath = null)
+    {
+        $hash = md5($content);
+        if ($this->cache->has($hash)) {
+            return $factory->createAsset($this->cache->get($hash), array(), array('root' => $loadPath));
+        } else {
+            return parent::getChildren($factory, $content, $loadPath);
+        }
     }
 }
