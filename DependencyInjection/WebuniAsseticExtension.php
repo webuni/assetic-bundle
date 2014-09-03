@@ -23,6 +23,7 @@ class WebuniAsseticExtension extends ConfigurableExtension
     protected function loadInternal(array $configs, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('controller.xml');
 
         foreach ($configs['filters'] as $name => $settings) {
             if (!$settings['enabled']) {
